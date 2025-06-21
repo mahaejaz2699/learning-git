@@ -1,0 +1,80 @@
+---
+title: "Stats"
+author: "Maha Ejaz"
+date: "2025-03-27"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Statistics with R - Assignment
+
+This repository contains an assignment related to statistical analysis using R.
+
+## Project Overview
+
+- This assignment involves applying statistical methods using R.
+- It includes data exploration, visualization, and hypothesis testing.
+- The goal is to gain hands-on experience with statistical concepts and R programming.
+
+
+1. Data exploration
+
+A brief overview of the data set, including the number of variables and their data types, and the number of observations.
+
+```{r echo=FALSE}
+data_set <- read.csv("~/Downloads/MA334-SP-7_2411621.csv")
+```
+
+```{r echo=FALSE}
+print(paste("The no.of variables in the dataset are:", length(data_set)))
+```
+
+```{r echo=FALSE}
+print(paste("The no.of rows in the dataset are:", nrow(data_set)))
+```
+
+```{r echo=FALSE}
+print(paste("The no.of columns in the dataset are:", ncol(data_set)))
+```
+
+Following is the list of variables and their data types:
+```{r echo=FALSE}
+str(data_set)
+```
+
+Descriptive statistics. Present your results clearly using tables and comment on your findings.
+
+```{r echo=FALSE}
+print(paste("The average age of individuals is", round(mean(data_set$age), 2), "years, with most falling between", round(min(data_set$age),2), "and", round(max(data_set$age), 2), "years."))
+```
+
+```{r echo=FALSE}
+print(paste("People work on average", round(mean(data_set$hrswork),2), "hours per week, but some report working a maximum of", max(data_set$hrswork), "hours"))
+```
+
+```{r echo=FALSE}
+print(paste("The wage distribution suggests that while some earn as little as", round(min(data_set$wage),2), "the highest earners make up to", max(data_set$wage), "per hour with a mean wage of",round(mean(data_set$wage),2) ))
+```
+
+No.of Male & Females are as follows:
+```{r, echo=FALSE}
+data_set$gender <- factor(data_set$gender, levels = c(0,1), labels = c("Male", "Female"))
+table(data_set$gender)
+```
+
+```{r, echo=FALSE}
+str(data_set$educ)
+data_set$educ <- as.numeric(as.character(data_set$educ))
+ata_set <- data_set[!is.na(data_set$educ), ]
+data_set$educ <- factor(data_set$educ, levels = c(0,1,2,3,4,5), labels = c("high school", "college no degree", "college with degree", "BA", "MA","PHD"), exclude =NULL)
+education <- table(data_set$educ)
+education_df <- as.data.frame(education)
+education_df
+```
+
+
